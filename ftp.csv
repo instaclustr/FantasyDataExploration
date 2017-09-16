@@ -1,0 +1,275 @@
+PLAYER,FTM,FTA,FT%
+"James Harden, SG",9.2,10.9,0.847
+"Russell Westbrook, PG",8.8,10.4,0.845
+"DeMarcus Cousins, C",7.2,9.3,0.772
+"Jimmy Butler, SG",7.7,8.9,0.865
+"DeMar DeRozan, SG",7.4,8.7,0.842
+"Anthony Davis, PF",6.9,8.6,0.802
+"Isaiah Thomas, PG",7.8,8.5,0.909
+"Joel Embiid, C",6.2,7.9,0.783
+"Giannis Antetokounmpo, SF",5.9,7.7,0.77
+"Damian Lillard, PG",6.5,7.3,0.895
+,,,
+"Kawhi Leonard, SF",6.3,7.2,0.88
+"LeBron James, SF",4.8,7.2,0.674
+"Eric Bledsoe, PG",5.9,6.9,0.847
+"Blake Griffin, PF",5.2,6.9,0.76
+"John Wall, PG",5.4,6.8,0.801
+"Andrew Wiggins, SG",5,6.6,0.76
+"Kevin Durant, SF",5.4,6.2,0.875
+"Danilo Gallinari, SF",5.5,6.1,0.902
+"Kyle Lowry, PG",5,6.1,0.819
+"Gordon Hayward, SF",5,5.9,0.844
+,,,
+"Rudy Gobert, C",3.8,5.9,0.653
+"Paul Millsap, PF",4.5,5.9,0.768
+"Dwight Howard, C",3.1,5.7,0.533
+"Devin Booker, SG",4.7,5.7,0.832
+"Lou Williams, SG",5,5.6,0.88
+"Mike Conley, PG",4.6,5.3,0.859
+"DeAndre Jordan, C",2.5,5.2,0.482
+"Karl-Anthony Towns, C",4.3,5.2,0.832
+"Goran Dragic, PG",4.1,5.2,0.79
+"Jeff Teague, PG",4.4,5.1,0.867
+,,,
+"Paul George, SF",4.5,5,0.898
+"Carmelo Anthony, SF",4.1,4.9,0.833
+"Kevin Love, PF",4.3,4.9,0.871
+"Brook Lopez, C",3.9,4.9,0.81
+"Dwyane Wade, SG",3.7,4.7,0.794
+"Hassan Whiteside, C",2.9,4.6,0.628
+"Rudy Gay, SF",3.9,4.6,0.855
+"Stephen Curry, PG",4.1,4.6,0.898
+"Kyrie Irving, PG",4.1,4.6,0.905
+"Kemba Walker, PG",3.8,4.5,0.847
+"Marc Gasol, C",3.8,4.5,0.837
+"Bradley Beal, SG",3.7,4.4,0.825
+"Andre Drummond, C",1.7,4.4,0.386
+"Jabari Parker, PF",3.2,4.3,0.743
+"Chris Paul, PG",3.8,4.3,0.892
+"Evan Fournier, SG",3.3,4.1,0.805
+"George Hill, PG",3.2,4,0.801
+"Dahntay Jones, SG",3,4,0.75
+"Enes Kanter, C",3.1,4,0.786
+"Derrick Rose, PG",3.5,4,0.874
+,,,
+"Jeremy Lin, PG",3.2,3.9,0.816
+"Kristaps Porzingis, PF",3,3.8,0.786
+"Julius Randle, PF",2.8,3.8,0.723
+"Ricky Rubio, PG",3.4,3.8,0.891
+"LaMarcus Aldridge, PF",3.1,3.8,0.812
+"Myles Turner, C",3,3.7,0.809
+"Mason Plumlee, C",2.1,3.7,0.58
+"Nicolas Batum, SG",3.2,3.7,0.856
+"CJ McCollum, SG",3.4,3.7,0.912
+"Harrison Barnes, SF",3.1,3.6,0.861
+,,,
+"Tyler Johnson, SG",2.7,3.5,0.768
+"Sean Kilpatrick, SG",2.9,3.5,0.843
+"Jerryd Bayless, PG",3,3.3,0.9
+"Rondae Hollis-Jefferson, SG",2.4,3.2,0.751
+"Jusuf Nurkic, C",1.8,3.2,0.571
+"Dennis Schroder, PG",2.8,3.2,0.855
+"Steven Adams, C",2,3.2,0.611
+"Khris Middleton, SG",2.8,3.2,0.88
+"Will Barton, SG",2.4,3.2,0.753
+"Marcus Smart, PG",2.6,3.2,0.812
+,,,
+"Cody Zeller, C",2.1,3.2,0.679
+"Jahlil Okafor, C",2.1,3.2,0.671
+"Terrence Jones, PF",1.9,3.1,0.606
+"Ty Lawson, PG",2.5,3.1,0.797
+"Nikola Jokic, C",2.6,3.1,0.825
+"Kenneth Faried, PF",2.1,3.1,0.693
+"Emmanuel Mudiay, PG",2.4,3,0.784
+"Jae Crowder, SF",2.4,3,0.811
+"Bojan Bogdanovic, SG",2.7,3,0.893
+"D'Angelo Russell, PG",2.3,3,0.782
+"Zach LaVine, PG",2.5,3,0.836
+"Greg Monroe, C",2.2,3,0.741
+"Nene Hilario, C",1.7,2.9,0.589
+"Bismack Biyombo, C",1.5,2.9,0.534
+"Pau Gasol, C",2,2.9,0.707
+"Brandon Knight, PG",2.4,2.9,0.857
+"Markieff Morris, PF",2.4,2.8,0.837
+"James Johnson, PF",2,2.8,0.707
+"Draymond Green, PF",2,2.8,0.709
+"Archie Goodwin, SG",2.2,2.8,0.786
+,,,
+"Klay Thompson, SG",2.4,2.8,0.853
+"Dion Waiters, SG",1.8,2.8,0.646
+"Tobias Harris, SF",2.3,2.8,0.841
+"Rodney Stuckey, PG",2.1,2.7,0.748
+"Wilson Chandler, SF",2,2.7,0.727
+"Tristan Thompson, C",1.4,2.7,0.498
+"Clint Capela, C",1.4,2.7,0.531
+"Dario Saric, SF",2.1,2.7,0.782
+"Jonas Valanciunas, C",2.2,2.7,0.811
+"Aaron Gordon, PF",2,2.7,0.719
+,,,
+"Tim Hardaway Jr., SG",2.1,2.7,0.766
+"Brandon Ingram, F",1.7,2.7,0.621
+"Alex Len, C",1.9,2.7,0.721
+"Spencer Dinwiddie, PG",2.1,2.7,0.792
+"Andrew Harrison, PG",2.1,2.7,0.763
+"Zach Randolph, PF",1.9,2.6,0.731
+"Tyson Chandler, C",1.9,2.6,0.734
+"Reggie Jackson, PG",2.3,2.6,0.868
+"Justise Winslow, SF",1.6,2.6,0.617
+"Robert Covington, SF",2.1,2.6,0.822
+,,,
+"JJ Redick, SG",2.3,2.6,0.891
+"Austin Rivers, PG",1.8,2.6,0.691
+"Elfrid Payton, PG",1.8,2.6,0.692
+"Ersan Ilyasova, PF",2,2.5,0.778
+"Darren Collison, PG",2.2,2.5,0.86
+"Jrue Holiday, PG",1.8,2.5,0.708
+"Jamal Crawford, SG",2.1,2.5,0.857
+"Wesley Matthews, SG",2,2.5,0.816
+"Shabazz Muhammad, SF",1.9,2.4,0.774
+"Jeff Green, SF",2.1,2.4,0.863
+"Kentavious Caldwell-Pope, SG",2,2.4,0.832
+"Ian Mahinmi, C",1.4,2.4,0.573
+"Michael Kidd-Gilchrist, SF",1.9,2.4,0.784
+"Alan Williams, PF",1.5,2.4,0.625
+"Ramon Sessions, PG",1.8,2.4,0.771
+"Gary Harris, SG",1.8,2.4,0.776
+"Marcus Morris, PF",1.8,2.3,0.784
+"Eric Gordon, SG",2,2.3,0.84
+"TJ Warren, SF",1.8,2.3,0.773
+"Kent Bazemore, SF",1.6,2.3,0.708
+,,,
+"Tyreke Evans, SG",1.7,2.3,0.75
+"Victor Oladipo, SG",1.7,2.3,0.753
+"Gerald Henderson, SG",1.8,2.3,0.806
+"Marco Belinelli, SG",2,2.3,0.893
+"Skal Labissiere, F",1.6,2.2,0.703
+"Al-Farouq Aminu, SF",1.6,2.2,0.706
+"Marquese Chriss, F",1.4,2.2,0.624
+"Derrick Favors, PF",1.3,2.2,0.615
+"Nerlens Noel, PF",1.5,2.2,0.694
+"JaMychal Green, PF",1.7,2.2,0.802
+,,,
+"Nikola Vucevic, C",1.4,2.1,0.669
+"Norman Powell, SG",1.7,2.1,0.792
+"Montrezl Harrell, PF",1.3,2.1,0.628
+"Ryan Anderson, PF",1.8,2.1,0.86
+"Jeremy Lamb, SG",1.8,2.1,0.853
+"Frank Kaminsky, C",1.6,2.1,0.756
+"Dirk Nowitzki, PF",1.8,2.1,0.875
+"D.J. Augustin, PG",1.7,2.1,0.814
+"Jodie Meeks, SG",1.8,2.1,0.878
+"Jordan Clarkson, PG",1.6,2,0.798
+,,,
+"Delon Wright, PG",1.6,2,0.764
+"Gorgui Dieng, PF",1.7,2,0.814
+"Taj Gibson, PF",1.4,2,0.715
+"Willie Cauley-Stein, C",1.3,2,0.669
+"Gary Neal, PG",2,2,1
+"Marcus Georges-Hunt, SG",1.8,2,0.9
+"Al Horford, C",1.6,2,0.8
+"Devin Harris, PG",1.6,2,0.829
+"Tim Frazier, PG",1.5,2,0.76
+"Marvin Williams, PF",1.7,2,0.873
+"David Nwaba, PG",1.3,2,0.641
+"Rodney Hood, SG",1.5,1.9,0.783
+"Shawn Long, PF",1.1,1.9,0.543
+"Marcin Gortat, C",1.3,1.9,0.648
+"Yogi Ferrell, PG",1.6,1.9,0.831
+"Brandon Jennings, PG",1.4,1.9,0.75
+"Nik Stauskas, SG",1.5,1.9,0.813
+"Michael Beasley, SF",1.4,1.9,0.743
+"Alec Burks, SG",1.4,1.9,0.769
+"Tony Parker, PG",1.3,1.9,0.727
+,,,
+"John Henson, PF",1.3,1.8,0.692
+"Jerami Grant, SF",1.1,1.8,0.612
+"Dwight Powell, PF",1.4,1.8,0.759
+"Tony Allen, SG",1.1,1.8,0.615
+"Nikola Mirotic, PF",1.4,1.8,0.773
+"Richaun Holmes, PF",1.3,1.8,0.699
+"Jarell Eddie, SG",1.6,1.8,0.889
+"Zaza Pachulia, C",1.4,1.8,0.778
+"Timothe Luwawu-Cabarrot, SG",1.5,1.8,0.854
+"Derrick Williams, PF",1.2,1.8,0.652
+,,,
+"Ed Davis, PF",1.1,1.8,0.617
+"Willy Hernangomez, C",1.3,1.7,0.728
+"Monta Ellis, SG",1.3,1.7,0.727
+"Justin Anderson, SG",1.4,1.7,0.791
+"James Ennis III, SF",1.3,1.7,0.782
+"Michael Carter-Williams, PG",1.3,1.7,0.753
+"Jonathan Gibson, PG",1.2,1.7,0.724
+"Deron Williams, PG",1.4,1.7,0.826
+"Joakim Noah, C",0.7,1.7,0.436
+"Brandon Bass, PF",1.5,1.7,0.875
+,,,
+"Jonathon Simmons, SG",1.3,1.7,0.75
+"Avery Bradley, PG",1.2,1.7,0.731
+"Malcolm Brogdon, G",1.5,1.7,0.865
+"Marreese Speights, PF",1.5,1.7,0.876
+"Alex Poythress, SF",1.3,1.7,0.8
+"Boban Marjanovic, C",1.3,1.7,0.81
+"Chasson Randle, PG",1.6,1.7,0.953
+"Kelly Olynyk, C",1.2,1.6,0.732
+"Caris LeVert, SG",1.2,1.6,0.72
+"Tarik Black, C",1.2,1.6,0.752
+"DeMarre Carroll, SF",1.2,1.6,0.761
+"Maurice Harkless, SF",1,1.6,0.621
+"Solomon Hill, SF",1.3,1.6,0.805
+"Taurean Prince, SF",1.3,1.6,0.787
+"Jaylen Brown, F",1.1,1.6,0.685
+"Evan Turner, SG",1.3,1.6,0.825
+"Serge Ibaka, PF",1.4,1.6,0.856
+"Quincy Acy, SF",1.2,1.6,0.75
+"Vince Carter, SG",1.2,1.6,0.765
+"Trevor Ariza, SF",1.2,1.6,0.738
+,,,
+"Wayne Selden, G",1,1.6,0.636
+"Allen Crabbe, SG",1.3,1.6,0.847
+"Anthony Bennett, PF",1.1,1.6,0.722
+"Roy Hibbert, C",1.3,1.6,0.813
+"Manu Ginobili, SG",1.2,1.6,0.804
+"Trevor Booker, PF",1,1.5,0.673
+"Isaiah Whitehead, G",1.2,1.5,0.805
+"Cory Joseph, PG",1.2,1.5,0.77
+"Arron Afflalo, SG",1.4,1.5,0.892
+"Ben McLemore, SG",1.1,1.5,0.753
+,,,
+"Jon Leuer, PF",1.3,1.5,0.867
+"Nick Young, SG",1.3,1.5,0.856
+"Edy Tavares, C",0,1.5,0
+"Otto Porter Jr., SF",1.2,1.5,0.832
+"Kris Humphries, PF",1.1,1.5,0.78
+"Jamal Murray, G",1.3,1.5,0.883
+"J.J. Barea, PG",1.3,1.5,0.863
+"Josh Richardson, SG",1.1,1.5,0.779
+"Timofey Mozgov, C",1.2,1.4,0.808
+"JaVale McGee, C",0.7,1.4,0.505
+,,,
+"Donatas Motiejunas, PF",0.7,1.4,0.51
+"David Lee, PF",1,1.4,0.708
+"Seth Curry, SG",1.2,1.4,0.85
+"Patrick Beverley, PG",1.1,1.4,0.768
+"Cristiano Felicio, PF",0.9,1.4,0.645
+"Andre Roberson, SG",0.6,1.4,0.423
+"Shelvin Mack, PG",1,1.4,0.688
+"Tiago Splitter, C",1.1,1.4,0.818
+"Thomas Robinson, PF",0.6,1.4,0.47
+"Jordan Crawford, SG",1.1,1.4,0.769
+,,,
+Ben Simmons,6,9,
+Lonzo Ball,2.1,3.1,
+Dennis Smith Jr.,5.1,7.2,
+Jayson Tatum,4.9,5.8,
+De'Aaron Fox,5.9,7.9,
+Josh Jackson,3.6,6.4,
+Markelle Fultz,4.9,7.5,
+Rajon Rondo,0.9,1.1,
+Robin Lopez,0.8,1.1,
+Joe Ingles,0.4,0.5,
+Thaddeus Young,0.6,1.2,
+Courtney Lee,1.1,1.3,
+Buddy Hield,1.4,1.7,
+T.J. McConnell,0.9,1.1,
+Terrence Ross,1,1.1,
