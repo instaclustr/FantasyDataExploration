@@ -122,8 +122,9 @@ es.indices.create(index ='fantasy', body=body)
 with open('OUTPUT_STATS.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for player in reader:
-    	print(player)
-    	body2 = { '3PM2017'    : player["3PM2017"],
+      print(player)
+      
+      body2 = { '3PM2017'    : player["3PM2017"],
   				      "3PM2018" 		: player["3PM2018"],
                 "3PP2017"     : (player["3PP2017"] if player["3PP2017"] else 0),
                 "3PA2017"     : (player["3PA2017"] if player["3PA2017"] else 0),
@@ -156,9 +157,9 @@ with open('OUTPUT_STATS.csv') as csvfile:
 		          	"TO2018" 		: player["TO2018"],
                 "DD2017"    : (player["DD2017"] if player["DD2017"] else '0'),
 		          	"Team + Position" : player["Team + Position"]}
-
-                # "3PP2017", "3PA2017", "DD2017", "FTA2017", "FTM2017"
-    	print(body2)
-    	es.index(index='fantasy', doc_type='player', id=i, body=body2)
-    	i=i+1
+      body2.update({"FGP_W" : float(body2["FGP2018"]) * float(body2["FGA2017"])})
+      body2.update({"FTP_W" : float(body2["FTP2018"]) * float(body2["FTA2017"])})
+      body2.update({"TPP_W" : float(body2["3PP2017"]) * float(body2["3PA2017"])})
+      es.index(index='fantasy', doc_type='player', id=i, body=body2)
+      i=i+1
     	# Input the player into the Elassandra cluster        

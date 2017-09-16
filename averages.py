@@ -36,6 +36,9 @@ body2 = [	"3PM2017"		 ,
           	"3PP2017"		 , 
           	"3PA2017"		 , 
           	"FTA2017"		 , 
+          	"TPP_W"			 ,
+          	"FTP_W"			 ,
+          	"FGP_W"			 ,
           	"FTM2017"]
 
 averages = dict()
@@ -136,6 +139,18 @@ body='''{
 	          "DD2017" : {
 	            "type" : "float"
 	          },
+
+	          "FGP_W" : {
+	            "type" : "float"
+	          },
+
+	          "FTP_W" : {
+	            "type" : "float"
+	          },
+
+	          "TPP_W" : {
+	            "type" : "float"
+	          },
 	          "Team + Position" : {
 	            "type" : "string"
 	          }
@@ -150,7 +165,7 @@ for stat in body2:
 	s.aggs.metric(stat, 'avg', field=stat)
 	averages["avg"+stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
 
-print(averages)
+
 
 try:
 	es.indices.delete(index='averages')
