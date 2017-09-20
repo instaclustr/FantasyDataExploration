@@ -264,6 +264,19 @@ for player_ery in players:
 				body2["dif_3PP_W"],
 				body2["dif_FTP_W"]])
   		})
+	body2.update({"player value punted" : sum([
+  				# body2["dif_3PM2018"], 
+				body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				body2["dif_TO2018"],
+				# body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				# body2["dif_3PP_W"],
+				body2["dif_FTP_W"]])
+  		})
 	# print(body2)
 	es.index(index='fantasy', doc_type='player_averages', id=i, body=body2)
 	i=i+1

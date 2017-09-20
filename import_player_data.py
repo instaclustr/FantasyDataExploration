@@ -1,6 +1,12 @@
 from elasticsearch import Elasticsearch
+
 import json
+
 import csv
+
+from cassandra.cluster import Cluster
+
+cluster = Cluster(['127.0.0.1'])
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 i=0
