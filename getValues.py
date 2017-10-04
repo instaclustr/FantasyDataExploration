@@ -2,8 +2,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
 def get_value(raw_value, average, games_played, mini, maxi):
-	# print(raw_value, average, games_played, mini, maxi)
-	values = ((normalise(mini, maxi, raw_value)- normalise(mini, maxi, average))*(games_played/82))/(normalise(mini, maxi, average))
+	values = ((normalise(mini, maxi, raw_value)- normalise(mini, maxi, average))*(games_played/82))
 	return values	
 
 def normalise(mini, maxi, value):
@@ -12,15 +11,11 @@ def normalise(mini, maxi, value):
 def value_helper(category, player, averages, minimum, maximum):
 	return get_value(player[category], averages["avg" + category], player["GP2018"], minimum[category], maximum[category])
 
-def value_helper_weighted():
-	return 1
-
 def average(list_of_stuff):
 	return sum(list_of_stuff)/float(len(list_of_stuff))
 
-
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
-
+# es = Elasticsearch(['https://icelassandra:393e5687f6680c5d0b1ba1f00da7faba@fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com:9201'])
+es = Elasticsearch()
 
 weight_perc = dict()
 FGP_W = []
@@ -28,6 +23,7 @@ FGP_W = []
 FTP_W = []
 
 TPP_W = []
+
 def weight_value(perc, attempts):
 	return (perc)*attempts
 
@@ -192,11 +188,6 @@ for stat in body2:
 	s = Search(using=client)
 	s.aggs.metric(stat, 'min', field=stat)
 	minimum[stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")	
-print(maximum)
-print(minimum)
-print(averages)
-# .get("hits").get("hits")[0].get("_source")
-
 
 s = Search(using=client)
 s._params['size'] = 150
@@ -205,51 +196,38 @@ weight_perc["FGP_W"] = []
 weight_perc["FTP_W"] = []
 weight_perc["TPP_W"] = []
 
-
-for player_ery in players:
-	player = player_ery.get("_source")
+for p in players:
+	player = p.get("_source")
 	weight_perc["FGP_W"].append(weight_value(player["FGP2017"], player["FGP2017"]))
 	weight_perc["FTP_W"].append(weight_value(player["FTP2017"], player["FTA2017"]))
 	weight_perc["TPP_W"].append(weight_value(player["3PP2017"], player["3PA2017"]))
 
  
 i=0
-for player_ery in players:
+for p in players:
 	# print(averages)
-	player = player_ery.get("_source")
+	player = p.get("_source")
 	body2 = {	
   				"dif_3PM2018" 		: value_helper("3PM2018", player, averages, minimum, maximum),
 	          	"dif_AST2018" 		: value_helper("AST2018", player, averages, minimum, maximum),
 	          	"dif_BLK2018" 		: value_helper("BLK2018", player, averages, minimum, maximum),
 	          	"dif_FGP2018" 		: value_helper("FGP2018", player, averages, minimum, maximum),
-	          	
 	          	"dif_FTP2017" 		: value_helper("FTP2017", player, averages, minimum, maximum),
 	          	"dif_FTP2018" 		: value_helper("FTP2018", player, averages, minimum, maximum),
-	          	
 	          	"dif_GP2018" 		: value_helper("GP2018", player, averages, minimum, maximum),
-	          	
-          	
 	          	"dif_PTS2018" 		: value_helper("PTS2018", player, averages, minimum, maximum),
-	          	
 	          	"dif_REB2018" 		: value_helper("REB2018", player, averages, minimum, maximum),
-	          	
 	          	"dif_STL2018" 		: value_helper("STL2018", player, averages, minimum, maximum),
-
 	          	"dif_3PP2017" 		: value_helper("3PP2017", player, averages, minimum, maximum),
 	          	"dif_3PA2017" 		: value_helper("3PA2017", player, averages, minimum, maximum),
 	          	"dif_DD2017" 		: value_helper("DD2017", player, averages, minimum, maximum),
 	          	"dif_FTA2017" 		: value_helper("FTA2017", player, averages, minimum, maximum),
 	          	"dif_FTM2017" 		: value_helper("FTM2017", player, averages, minimum, maximum),
-	          	
 	          	"Player Name" 		: player["Player Name"],
 	          	"dif_TO2018" 		: -value_helper("TO2018", player, averages, minimum, maximum),
-	          						  
 	          	"dif_FGP_W"			: value_helper("FGP_W", player, averages, minimum, maximum),
-
 	          	"dif_3PP_W"			: value_helper("TPP_W", player, averages, minimum, maximum),
-
 	          	"dif_FTP_W"			: value_helper("FTP_W", player, averages, minimum, maximum),
-	
 	          	}
 	body2.update({"player value" : sum([
   				body2["dif_3PM2018"], 
@@ -277,7 +255,71 @@ for player_ery in players:
 				# body2["dif_3PP_W"],
 				body2["dif_FTP_W"]])
   		})
-	# print(body2)
+	body2.update({"player value punted - not DD though" : sum([
+  				# body2["dif_3PM2018"], 
+				body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				body2["dif_TO2018"],
+				body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				# body2["dif_3PP_W"],
+				body2["dif_FTP_W"]])
+  		})
+	body2.update({"player value punted to - not DD though" : sum([
+  				# body2["dif_3PM2018"], 
+				body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				# body2["dif_TO2018"],
+				body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				# body2["dif_3PP_W"],
+				body2["dif_FTP_W"]])
+  		})
+	body2.update({"player value punted assists" : sum([
+  				body2["dif_3PM2018"], 
+				# body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				body2["dif_TO2018"],
+				body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				body2["dif_3PP_W"],
+				body2["dif_FTP_W"]])
+  		})
+	body2.update({"player value punted free throw" : sum([
+  				body2["dif_3PM2018"], 
+				body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				body2["dif_TO2018"],
+				body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				body2["dif_3PP_W"]])
+				# body2["dif_FTP_W"]])
+  		})
+	body2.update({"tpp" : sum([
+  				body2["dif_3PM2018"], 
+				body2["dif_AST2018"],
+				body2["dif_PTS2018"],
+				body2["dif_REB2018"],
+				body2["dif_STL2018"],
+				body2["dif_TO2018"],
+				body2["dif_DD2017"],
+				body2["dif_BLK2018"],
+				body2["dif_FGP_W"],
+				# body2["dif_3PP_W"]])
+				body2["dif_FTP_W"]]) 
+  		})
 	es.index(index='fantasy', doc_type='player_averages', id=i, body=body2)
 	i=i+1
 

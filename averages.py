@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
 
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = Elasticsearch(['https://icelassandra:393e5687f6680c5d0b1ba1f00da7faba@fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com:9201'])
 
 client = Elasticsearch()
 # Work get averages for each field from top 150 players
@@ -40,7 +40,7 @@ body2 = [	"3PM2017"		 ,
           	"FTP_W"			 ,
           	"FGP_W"			 ,
           	"FTM2017"]
-
+          	
 averages = dict()
 
 body='''{
@@ -165,8 +165,6 @@ for stat in body2:
 	s.aggs.metric(stat, 'avg', field=stat)
 	averages["avg"+stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
 
-
-
 try:
 	es.indices.delete(index='averages')
 except Exception as e:
@@ -178,4 +176,3 @@ except Exception as e:
 	pass
 es.index(index='fantasy', doc_type='averages', id=1, body=averages)
 
-# put into new doctype "average"

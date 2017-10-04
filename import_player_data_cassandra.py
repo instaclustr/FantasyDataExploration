@@ -2,21 +2,21 @@ from cassandra.cluster import Cluster
 from elasticsearch import Elasticsearch
 import csv
 
-cluster = Cluster(['127.0.0.1'])
+from cassandra.policies import DCAwareRoundRobinPolicy
 
-# session = cluster.connect()
+cluster = Cluster(
+    contact_points=[
+        "34.225.208.218", "34.234.115.209", "34.192.170.50" # AWS_VPC_US_EAST_1 (Amazon Web Services (VPC))
+    ],
+    load_balancing_policy=DCAwareRoundRobinPolicy(local_dc='AWS_VPC_US_EAST_1'), # your local data centre
+    port=9042
+)
 
-# session.execute("""
-#     CREATE KEYSPACE fantasy
-#     WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '1' }
-#     """)
+session = cluster.connect()
 
-
-
-# cluster = Cluster(['127.0.0.1'])
-
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = Elasticsearch(['https://icelassandra:393e5687f6680c5d0b1ba1f00da7faba@fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com:9201'])
 i=0
+# Sets outmappings for categories we will be creating
 body='''{
   "mappings" : {
       "player" : {
@@ -156,7 +156,6 @@ x="0"
 with open('OUTPUT_STATS.csv') as csvfile:
 	reader = csv.DictReader(csvfile)
 	for player in reader:
-		print(player)
 		session.execute(prepared.bind((
 			[float(player["3PM2017"])],
 			[float(player["3PM2018"])],
@@ -196,6 +195,5 @@ with open('OUTPUT_STATS.csv') as csvfile:
 			[float(player["3PA2017"] if player["3PA2017"] is not "" else 0) * float(player["3PP2017"] if player["3PP2017"] is not "" else 0)],
 
  			x,)))
-		# print(x)
 		x=str(int(x)+1)
 
