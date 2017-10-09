@@ -1,6 +1,23 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
+import argparse
+
+parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')
+parser.add_argument('-url', 
+                   help='The URL address of the Elasticsearch cluster e.g. fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com')
+parser.add_argument('-u', 
+                   help='Username for Elasticsearch')
+parser.add_argument('-p', 
+                   help='Username for Elasticsearch')
+parser.add_argument('-n', default='player_value', 
+                   help='Name of the Value')
+parser.add_argument('-s', default="dif_3PM2018,dif_AST2018,dif_PTS2018,dif_REB2018,dif_STL2018,dif_TO2018,dif_DD2017,dif_BLK2018,dif_FGP_W,dif_3PP_W,dif_FTP_W",
+                   help='Comma separated list of Statistics to sum e.g. dif_3PM2018,dif_DD2017')
+args = parser.parse_args()
+
+es = Elasticsearch(['https://' + args.u + ':' + args.p + '@' + args.url+':9201'])
+
 def get_value(raw_value, average, games_played, mini, maxi):
 	values = ((normalise(mini, maxi, raw_value)- normalise(mini, maxi, average))*(games_played/82))
 	return values	
@@ -14,9 +31,6 @@ def value_helper(category, player, averages, minimum, maximum):
 def average(list_of_stuff):
 	return sum(list_of_stuff)/float(len(list_of_stuff))
 
-# es = Elasticsearch(['https://icelassandra:393e5687f6680c5d0b1ba1f00da7faba@fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com:9201'])
-es = Elasticsearch()
-
 weight_perc = dict()
 FGP_W = []
 
@@ -27,7 +41,6 @@ TPP_W = []
 def weight_value(perc, attempts):
 	return (perc)*attempts
 
-client = Elasticsearch()
 
 body2 = [	"3PM2017"		 ,
 			"3PM2018" 		 ,
@@ -173,39 +186,28 @@ body='''{
   	}
 }'''
 
-sa = Search(using=client)
+sa = Search(using=es)
 averages = sa.filter('term', _type="averages").execute().to_dict().get("hits").get("hits")[-1].get("_source")
 
 
 maximum = dict()
 for stat in body2:
-	s = Search(using=client)
+	s = Search(using=es)
 	s.aggs.metric(stat, 'max', field=stat)
 	maximum[stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
 
 minimum = dict()
 for stat in body2:
-	s = Search(using=client)
+	s = Search(using=es)
 	s.aggs.metric(stat, 'min', field=stat)
 	minimum[stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")	
 
-s = Search(using=client)
+s = Search(using=es)
 s._params['size'] = 150
 players = s.filter('term', _type="player").execute().to_dict().get("hits").get("hits")
-weight_perc["FGP_W"] = []
-weight_perc["FTP_W"] = []
-weight_perc["TPP_W"] = []
-
-for p in players:
-	player = p.get("_source")
-	weight_perc["FGP_W"].append(weight_value(player["FGP2017"], player["FGP2017"]))
-	weight_perc["FTP_W"].append(weight_value(player["FTP2017"], player["FTA2017"]))
-	weight_perc["TPP_W"].append(weight_value(player["3PP2017"], player["3PA2017"]))
-
  
-i=0
+
 for p in players:
-	# print(averages)
 	player = p.get("_source")
 	body2 = {	
   				"dif_3PM2018" 		: value_helper("3PM2018", player, averages, minimum, maximum),
@@ -229,99 +231,7 @@ for p in players:
 	          	"dif_3PP_W"			: value_helper("TPP_W", player, averages, minimum, maximum),
 	          	"dif_FTP_W"			: value_helper("FTP_W", player, averages, minimum, maximum),
 	          	}
-	body2.update({"player value" : sum([
-  				body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				body2["dif_3PP_W"],
-				body2["dif_FTP_W"]])
-  		})
-	body2.update({"player value punted" : sum([
-  				# body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				# body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				# body2["dif_3PP_W"],
-				body2["dif_FTP_W"]])
-  		})
-	body2.update({"player value punted - not DD though" : sum([
-  				# body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				# body2["dif_3PP_W"],
-				body2["dif_FTP_W"]])
-  		})
-	body2.update({"player value punted to - not DD though" : sum([
-  				# body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				# body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				# body2["dif_3PP_W"],
-				body2["dif_FTP_W"]])
-  		})
-	body2.update({"player value punted assists" : sum([
-  				body2["dif_3PM2018"], 
-				# body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				body2["dif_3PP_W"],
-				body2["dif_FTP_W"]])
-  		})
-	body2.update({"player value punted free throw" : sum([
-  				body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				body2["dif_3PP_W"]])
-				# body2["dif_FTP_W"]])
-  		})
-	body2.update({"tpp" : sum([
-  				body2["dif_3PM2018"], 
-				body2["dif_AST2018"],
-				body2["dif_PTS2018"],
-				body2["dif_REB2018"],
-				body2["dif_STL2018"],
-				body2["dif_TO2018"],
-				body2["dif_DD2017"],
-				body2["dif_BLK2018"],
-				body2["dif_FGP_W"],
-				# body2["dif_3PP_W"]])
-				body2["dif_FTP_W"]]) 
-  		})
-	es.index(index='fantasy', doc_type='player_averages', id=i, body=body2)
-	i=i+1
+	es.index(index='fantasy', doc_type='player_averages', body=body2)
 
 
 

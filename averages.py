@@ -1,10 +1,19 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+import argparse
+
+# Parse the Arguments needed
+parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')
+parser.add_argument('-url', 
+                   help='The URL address of the Elasticsearch cluster e.g. fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com')
+parser.add_argument('-u', 
+                   help='Username for Elasticsearch')
+parser.add_argument('-p', 
+                   help='Username for Elasticsearch')
+args = parser.parse_args()
 
 
-es = Elasticsearch(['https://icelassandra:393e5687f6680c5d0b1ba1f00da7faba@fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com:9201'])
-
-client = Elasticsearch()
+es = Elasticsearch(['https://' + args.u + ':' + args.p + '@' + args.url+':9201'])
 # Work get averages for each field from top 150 players
 body2 = [	"3PM2017"		 ,
 			"3PM2018" 		 ,
@@ -161,14 +170,9 @@ body='''{
 
 
 for stat in body2:
-	s = Search(using=client)
+	s = Search(using=es)
 	s.aggs.metric(stat, 'avg', field=stat)
 	averages["avg"+stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
-
-try:
-	es.indices.delete(index='averages')
-except Exception as e:
-	es.indices.create(index ='averages', body=body)
 
 try:
 	es.delete(index='fantasy', doc_type='averages', id=1)

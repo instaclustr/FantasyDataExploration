@@ -2,6 +2,7 @@
 # Instaclustr - 2017
 
 # Import the packages needed
+from elasticsearch import Elasticsearch
 from cassandra.cluster import Cluster
 from elasticsearch_dsl import Search
 import json
@@ -19,7 +20,6 @@ parser.add_argument('-p',
 args = parser.parse_args()
 
 # Connect to the Elasticsearch Cluster
-client = Elasticsearch()
 es = Elasticsearch(['https://' + args.u + ':' + args.p + '@' + args.url+':9201'])
 
 # Create the mapping for the Category category
@@ -52,7 +52,7 @@ categories = [	"3PM2018",
 				"FTP_W"]
 
 # Using the client perform a search
-s = Search(using=client)
+s = Search(using=es)
 # Set the maximum number of returns
 s._params['size'] = 150
 

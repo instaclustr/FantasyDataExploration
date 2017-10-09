@@ -35,6 +35,7 @@ cluster = Cluster(
 
 # Connect to the cassandra
 session = cluster.connect()
+print(args.u, args.p, args.url)
 # Specify the Elasticsearch URL, embedding the username and pasword
 es = Elasticsearch(['https://' + args.u + ':' + args.p + '@' + args.url+':9201'])
 
