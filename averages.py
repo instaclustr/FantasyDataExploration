@@ -1,3 +1,7 @@
+# Jordan Braiuka
+# Instaclustr - 2017
+
+#Import required packages
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import argparse
@@ -168,15 +172,18 @@ body='''{
 	  	}
 	}'''
 
-
+# For every stat
 for stat in body2:
 	s = Search(using=es)
 	s.aggs.metric(stat, 'avg', field=stat)
+	# Search for the average
 	averages["avg"+stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
 
 try:
+	# If it already exists in the cluster, remove it
 	es.delete(index='fantasy', doc_type='averages', id=1)
 except Exception as e:
 	pass
+# Write it back into the cluster
 es.index(index='fantasy', doc_type='averages', id=1, body=averages)
 
