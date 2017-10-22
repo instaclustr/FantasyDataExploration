@@ -27,24 +27,21 @@ s = Search(using=es)
 s._params['size'] = 150
 
 # Get the player averages
-player_averages = s.filter('term', _type="player_averages").execute().to_dict().get("hits").get("hits")
+player_averages = s.filter('term', _type="player_values").execute().to_dict().get("hits").get("hits")
 
-print(player_averages)
 # for every player
 for player in player_averages:
 	p = player.get("_source")
 	# Their value starts at 0
 	value = 0.0
-	body2 = {
-          	"Player Name" 		: p.get("Player Name"),
-          	}
+	id = p.get("id")
+	body2 = p
   	# For every category we care about
 	for category in args.s.split(','):
 		# Add it to their value
 		value+= float(p.get(category))
-
 	body2.update({args.n : value, 
   		})
 	# Write this value back into the players value doctype
-	es.index(index='fantasy', doc_type='player_values', body=body2)
+	es.index(index='fantasy', doc_type='player_values', id=id, body=body2)
 

@@ -40,7 +40,7 @@ print(args.u, args.p, args.url)
 es = Elasticsearch(['https://' + args.u + ':' + args.p + '@' + args.url+':9201'])
 
 # Sets outmappings for categories we will be creating
-body='''{
+body='''{ 
   "mappings" : {
       "player" : {
         "properties" : {
@@ -159,14 +159,13 @@ body='''{
 }'''
 
 # Try and delete the index if it already exists
-try:
-  es.indices.delete(index='fantasy')
-except Exception as e:
-  pass
+# try:
+#   es.indices.delete(index='fantasy')
+# except Exception as e:
+#   pass
 
 # Create the fantasy index through Elasticsearch
 es.indices.create(index ='fantasy', body=body)
-
 # Connect to the cassandra cluster, the keyspace fantasy
 session = cluster.connect("fantasy")
 

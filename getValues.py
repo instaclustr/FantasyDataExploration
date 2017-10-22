@@ -206,8 +206,9 @@ s = Search(using=es)
 s._params['size'] = 150
 players = s.filter('term', _type="player").execute().to_dict().get("hits").get("hits")
  
-
+x=0
 for p in players:
+  value=0.0
   player = p.get("_source")
   body2 = { 
           "dif_3PM2018"     : value_helper("3PM2018", player, averages, minimum, maximum),
@@ -230,9 +231,15 @@ for p in players:
               "dif_FGP_W"     : value_helper("FGP_W", player, averages, minimum, maximum),
               "dif_3PP_W"     : value_helper("TPP_W", player, averages, minimum, maximum),
               "dif_FTP_W"     : value_helper("FTP_W", player, averages, minimum, maximum),
+              "id"            : x
               }
-  es.index(index='fantasy', doc_type='player_averages', body=body2)
-  es.index(index='fantasy', doc_type='player_values', body=body2)
+  for category in args.s.split(','):
+    # Add it to their value
+    value+= float(body2[category])
+  body2.update({args.n : value, 
+      })
+  es.index(index='fantasy', doc_type='player_values', body=body2, id=x)
+  x = x+1
 
 
 
