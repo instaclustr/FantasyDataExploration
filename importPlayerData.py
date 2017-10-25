@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='Import player data into a cassandr
 parser.add_argument('-ip', 
                    help='A comma separated list of Node IP Addresses')
 parser.add_argument('-url', 
-                   help='The URL address of the Elasticsearch cluster e.g. fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com')
+                   help='The URL address of the Elasticsearch cluster not including port or https e.g. fb8da90356c94a0bb4ebf52579e814bb.cu.dev.instaclustr.com')
 parser.add_argument('-u', 
                    help='Username for Elasticsearch')
 parser.add_argument('-p', 
