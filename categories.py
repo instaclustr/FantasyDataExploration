@@ -8,6 +8,7 @@ from elasticsearch_dsl import Search
 import json
 from cassandra.policies import DCAwareRoundRobinPolicy
 import argparse
+import sys
 
 # Parse the Arguments needed
 parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')
@@ -58,6 +59,10 @@ s._params['size'] = 150
 
 # Complete the search
 players = s.filter('term', _type="player").execute().to_dict().get("hits").get("hits")
+
+if len(players) is 0:
+	print("It looks like it hasn't indexed the previous operation yet. Try again in a minute")
+	sys.exit()
 
 for p in players:
 	player = p.get("_source")

@@ -5,6 +5,7 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import argparse
+import sys
 
 # Parse the Arguments
 parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')
@@ -28,6 +29,11 @@ s._params['size'] = 150
 
 # Get the player averages
 player_averages = s.filter('term', _type="player_values").execute().to_dict().get("hits").get("hits")
+
+
+if len(player_averages) is 0:
+	print("It looks like it hasn't indexed the previous operation yet. Try again in a minute")
+	sys.exit()
 
 # for every player
 for player in player_averages:

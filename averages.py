@@ -5,6 +5,7 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import argparse
+import sys
 
 # Parse the Arguments needed
 parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')

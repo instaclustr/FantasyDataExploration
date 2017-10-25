@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
-
+import sys
 import argparse
 
 parser = argparse.ArgumentParser(description='Import player data into a cassandra cluster')
@@ -206,10 +206,16 @@ s = Search(using=es)
 s._params['size'] = 150
 players = s.filter('term', _type="player").execute().to_dict().get("hits").get("hits")
  
-x=0
+x=1
+
+if len(players) is not 150:
+  print("It looks like it hasn't indexed the previous operation yet. Try again in a minute")
+  sys.exit()
+
 for p in players:
   value=0.0
   player = p.get("_source")
+  print(player["Player Name"])
   body2 = { 
           "dif_3PM2018"     : value_helper("3PM2018", player, averages, minimum, maximum),
               "dif_AST2018"     : value_helper("AST2018", player, averages, minimum, maximum),
