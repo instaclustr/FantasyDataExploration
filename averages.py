@@ -180,11 +180,6 @@ for stat in body2:
 	# Search for the average
 	averages["avg"+stat] = s.execute().to_dict().get("aggregations").get(stat).get("value")
 
-try:
-	# If it already exists in the cluster, remove it
-	es.delete(index='fantasy', doc_type='averages', id=1)
-except Exception as e:
-	pass
 # Write it back into the cluster
 es.index(index='fantasy', doc_type='averages', id=1, body=averages)
 

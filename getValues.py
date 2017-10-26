@@ -187,7 +187,12 @@ body='''{
 }'''
 
 sa = Search(using=es)
-averages = sa.filter('term', _type="averages").execute().to_dict().get("hits").get("hits")[-1].get("_source")
+averages = sa.filter('term', _type="averages").execute().to_dict().get("hits").get("hits")
+if (len(averages) is 0):
+  print("It looks like it hasn't indexed the previous operation yet. Try again in a minute")
+  sys.exit()
+
+averages = averages[-1].get("_source")
 
 
 maximum = dict()
