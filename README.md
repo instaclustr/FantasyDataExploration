@@ -10,3 +10,5 @@ This presented a huge hurdle for me. I am horrible at the statistics. I find it 
 
 #### Accompanying Blog Post
 An accompanying blog post for this repo is available [here](https://www.instaclustr.com/fantasy-basketball-data-exploration/)
+
+Please see https://www.instaclustr.com/support/documentation/announcements/instaclustr-open-source-project-status/ for Instaclustr support status of this project.
